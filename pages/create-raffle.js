@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
+import getRandomImage from "../utils/getRandomImage";
+import { ethers } from "ethers";
+
+import connectContract from "../utils/connectContract";
+
 export default function CreateEvent() {
   const [raffleName, setRaffleName] = useState("");
   const [raffleEndDate, setRaffleEndDate] = useState("");
@@ -12,11 +17,78 @@ export default function CreateEvent() {
   const [raffleDescription, setRaffleDescription] = useState("");
 
 
+  const toBytes = (str) => ethers.utils.formatBytes32String(str);
+  const fromBytes = (byt) => ethers.utils.parseBytes32String(byt);
+  const toEther = (str) => ethers.utils.parseEther(str);
+  const fromEther = (eth) => Number(ethers.utils.formatEther(eth));
+
   async function handleSubmit(e) {
+
     e.preventDefault();
     console.log("Form submitted")
-  }
 
+    const body = {
+      name: raffleName,
+      description: raffleDescription,
+      image: getRandomImage(),
+    };
+
+    try {
+      const response = await fetch("/api/store-event-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.status !== 200) {
+        alert("Oops! Something went wrong. Please refresh and try again.");
+      } else {
+        console.log("Form successfully submitted!");
+        let responseJSON = await response.json();
+        await createEvent(responseJSON.cid);
+      }
+      // check response, if success is false, dont take them to success page
+    } catch (error) {
+      alert(
+        `Oops! Something went wrong. Please refresh and try again. Error ${error}`
+      );
+    }
+  }
+  
+
+  const createEvent = async (cid) => {
+    try {
+      const deffleContract = connectContract();
+  
+      if (deffleContract) {
+
+        let creationFee = await  deffleContract.creationFee();
+        creationFee = creationFee.toString();
+        alert("This transaction would cost ", creationFee, " matic");
+
+        let strData = toBytes(cid);
+        let entranceFee = toEther(entryFee)
+        let raffleDateAndTime = new Date(`${raffleEndDate} ${raffleEndTime}`);
+        let deadline = eventDateAndTime.getTime();
+        let eventDataCID = cid;
+        let passcode = toBytes(passCode);
+  
+        const txn = await deffleContract.createRaffle(
+          strData,
+          entranceFee,
+          deadline,
+          maxParticipants,
+          passCode,
+          { value: creationFee}
+        );
+        console.log("Minting...", txn.hash);
+        console.log("Minted -- ", txn.hash);
+      } else {
+        console.log("Error getting contract.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
 
   useEffect(() => {
