@@ -3,13 +3,13 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function CreateEvent() {
-  const [eventName, setEventName] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [eventTime, setEventTime] = useState("");
-  const [maxCapacity, setMaxCapacity] = useState("");
-  const [refund, setRefund] = useState("");
-  const [eventLink, setEventLink] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
+  const [raffleName, setRaffleName] = useState("");
+  const [raffleEndDate, setRaffleEndDate] = useState("");
+  const [raffleEndTime, setRaffleEndTime] = useState("");
+  const [maxParticipants, setMaxParticipants] = useState("");
+  const [entryFee, setEntryFee] = useState("");
+  const [passCode, setPassCode] = useState("");
+  const [raffleDescription, setRaffleDescription] = useState("");
 
 
   async function handleSubmit(e) {
@@ -31,16 +31,16 @@ export default function CreateEvent() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <Head>
-        <title>Create your event | web3rsvp</title>
+        <title>Create your Raffle | Deffle</title>
         <meta
           name="description"
-          content="Create your virtual event on the blockchain"
+          content="Create your raffle on the blockchain"
         />
       </Head>
       <section className="relative py-12">
     
           <h1 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl mb-4">
-            Create your virtual event
+            Create your Raffle
           </h1>
         
      
@@ -54,7 +54,7 @@ export default function CreateEvent() {
                   htmlFor="eventname"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Event name
+                  Raffle name
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <input
@@ -63,8 +63,8 @@ export default function CreateEvent() {
                     type="text"
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
                     required
-                    value={eventName}
-                    onChange={(e) => setEventName(e.target.value)}
+                    value={raffleName}
+                    onChange={(e) => setRaffleName(e.target.value)}
                   />
                 </div>
               </div>
@@ -74,9 +74,9 @@ export default function CreateEvent() {
                   htmlFor="date"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Date & time
+                  Deadline
                   <p className="mt-1 max-w-2xl text-sm text-gray-400">
-                    Your event date and time
+                    The Date and Time your raffle should end
                   </p>
                 </label>
                 <div className="mt-1 sm:mt-0 flex flex-wrap sm:flex-nowrap gap-2">
@@ -87,8 +87,8 @@ export default function CreateEvent() {
                       type="date"
                       className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border border-gray-300 rounded-md"
                       required
-                      value={eventDate}
-                      onChange={(e) => setEventDate(e.target.value)}
+                      value={raffleEndDate}
+                      onChange={(e) => setRaffleEndDate(e.target.value)}
                     />
                   </div>
                   <div className="w-1/2">
@@ -98,8 +98,8 @@ export default function CreateEvent() {
                       type="time"
                       className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border border-gray-300 rounded-md"
                       required
-                      value={eventTime}
-                      onChange={(e) => setEventTime(e.target.value)}
+                      value={raffleEndTime}
+                      onChange={(e) => setRaffleEndTime(e.target.value)}
                     />
                   </div>
                 </div>
@@ -112,7 +112,7 @@ export default function CreateEvent() {
                 >
                   Max capacity
                   <p className="mt-1 max-w-2xl text-sm text-gray-400">
-                    Limit the number of spots available for your event.
+                    Limit the number of slots available for your raffle
                   </p>
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -123,8 +123,8 @@ export default function CreateEvent() {
                     min="1"
                     placeholder="100"
                     className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border border-gray-300 rounded-md"
-                    value={maxCapacity}
-                    onChange={(e) => setMaxCapacity(e.target.value)}
+                    value={maxParticipants}
+                    onChange={(e) => setMaxParticipants(e.target.value)}
                   />
                 </div>
               </div>
@@ -134,10 +134,9 @@ export default function CreateEvent() {
                   htmlFor="refundable-deposit"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Refundable deposit
+                  Cost of RaffleTickets
                   <p className="mt-1 max-w-2xl text-sm text-gray-400">
-                    Require a refundable deposit (in MATIC) to reserve one spot
-                    at your event
+                    How much should a ticket in your raffle game cost ?
                   </p>
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -150,8 +149,8 @@ export default function CreateEvent() {
                     inputMode="decimal"
                     placeholder="0.00"
                     className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border border-gray-300 rounded-md"
-                    value={refund}
-                    onChange={(e) => setRefund(e.target.value)}
+                    value={entryFee}
+                    onChange={(e) => setEntryFee(e.target.value)}
                   />
                 </div>
               </div>
@@ -161,9 +160,9 @@ export default function CreateEvent() {
                   htmlFor="event-link"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Event link
+                  SECRET PASS CODE
                   <p className="mt-1 max-w-2xl text-sm text-gray-400">
-                    The link for your virtual event
+                    The secret pass code players interested in your raffle would use to join
                   </p>
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -173,8 +172,8 @@ export default function CreateEvent() {
                     type="text"
                     className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
                     required
-                    value={eventLink}
-                    onChange={(e) => setEventLink(e.target.value)}
+                    value={passCode}
+                    onChange={(e) => setPassCode(e.target.value)}
                   />
                 </div>
               </div>
@@ -183,9 +182,9 @@ export default function CreateEvent() {
                   htmlFor="about"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Event description
+                  Raffle Description
                   <p className="mt-2 text-sm text-gray-400">
-                    Let people know what your event is about!
+                    Talk a bit about your raffle
                   </p>
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -194,8 +193,8 @@ export default function CreateEvent() {
                     name="about"
                     rows={10}
                     className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
-                    value={eventDescription}
-                    onChange={(e) => setEventDescription(e.target.value)}
+                    value={raffleDescription}
+                    onChange={(e) => setRaffleDescription(e.target.value)}
                   />
                 </div>
               </div>
