@@ -80,4 +80,4 @@ The contract was deployed on mumbai at [0x21190B74b28516c28F486589299A552eB33Dd2
 
 ## MORE INFO 
 [Landing Page](https://deffle-landing-page.on.fleek.co/)
-[Live Dapp](https://)
+[Dapp BUILD IN PROGRESS](https://deffle.on.fleek.co)
