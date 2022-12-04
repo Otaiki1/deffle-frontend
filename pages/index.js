@@ -1,7 +1,13 @@
 import Landing from "../components/Landing";
 
+import { useState } from "react";
+import EventCard from "../components/EventCard";
+
+    
 
 export default function Home() {
+
+  
   return (
     <Landing>
       <ul

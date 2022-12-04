@@ -11,7 +11,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import Alert from "../components/Alert";
 
-export default function CreateEvent() {
+export default function CreateRaffle() {
 
   const { data: account } = useAccount();
 
