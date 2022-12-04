@@ -45,7 +45,7 @@ Deffle is not governed by an organisation but by an immutable code (cannot be ch
 
 -[EthersJS](https://docs.ethers.io/v5) Javascript  based library for interacting with the Ethereum Blockchain and its ecosystem, used to make contract calls
 
--[Fleek](https://app.fleek.co) DECENTRALIZED HOSTING SYSTEM to prevent frontend censorship
+-[Vercel](https://vercel.app) HOSTING SYSTEM for frontend
 
 
 
@@ -80,4 +80,4 @@ The contract was deployed on mumbai at [0x21190B74b28516c28F486589299A552eB33Dd2
 
 ## MORE INFO 
 [Landing Page](https://deffle-landing-page.on.fleek.co/)
-[Dapp BUILD IN PROGRESS](https://deffle.on.fleek.co)
+[Dapp(still Ongoing build )](https://deffle-frontend-01.vercel.app/)
