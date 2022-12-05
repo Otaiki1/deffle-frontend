@@ -44,11 +44,12 @@ function Event({data}) {
 
 
   const[deadline, setDeadline] = useState("")
-  const[participants, setParticipants] = useState("")
+  const[participants, setParticipants] = useState([])
   const[ownerAddress, setOwnerAddress] = useState("")
-  const[entryFee, setEntryFee] = useState("")
+  const[entryFee, setEntryFee] = useState("0")
   const [currentTimestamp, setEventTimestamp] = useState(new Date().getTime());
   const[passcode, setPasscode] = useState("");
+  const[entryNumber, setEntryNumber] = useState(0);
 
   const deffle = connectContract();
   console.log("data is ", data)
@@ -66,7 +67,7 @@ function Event({data}) {
                   "participants":await deffle.getPlayers(_id),
                   "owner":await deffle.getRaffleOwner(_id),
                   "raffleState":await deffle.getRaffleState(_id),
-                  "raffleBalance":await deffle.getRaffleBalance(_id).toString(),
+                  "raffleBalance":(await deffle.getRaffleBalance(_id)).toString(),
                   "raffleWinner":await deffle.getRaffleWinner(_id),
           }
         setDeadline(_data.deadline)
@@ -79,7 +80,7 @@ function Event({data}) {
     return _data
   }
 
-  function checkIfAlreadyEntered() {
+  async function checkIfAlreadyEntered() {
     
     if (account) {
       for (let i = 0; i < participants.length; i++) {
@@ -89,6 +90,7 @@ function Event({data}) {
         }
       }
     }
+    await countEntries(participants);
     return false;
   }
 
@@ -103,6 +105,7 @@ function Event({data}) {
           }
         }
       }
+      setEntryNumber(ii);
       return ii;
     }
    return 0
@@ -139,6 +142,7 @@ function Event({data}) {
   
   useEffect(()=>{
     fetchDetails(data.id)
+    countEntries(participants)
   },[])
 
   return (
@@ -219,7 +223,7 @@ function Event({data}) {
                   className="w-full items-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={newEntry}
                 >
-                  Get slot for {entryFee} MATIC
+                  Get slot for {fromEther(entryFee)} MATIC
                 </button>
                 
                 ) : (
@@ -243,7 +247,7 @@ function Event({data}) {
             {checkIfAlreadyEntered() && 
                   <>
                     <span className="w-full text-center px-6 py-3 text-base font-medium rounded-full text-teal-800 bg-teal-100">
-                      You have Bought {() => countEntries(participants)} entries🙌
+                      You have Bought {entryNumber} entries🙌
                     </span>
                     <div className="flex item-center">
                       <LinkIcon className="w-6 mr-2 text-indigo-800" />
