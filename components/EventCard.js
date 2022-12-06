@@ -3,11 +3,11 @@ import Image from "next/image";
 import formatTimestamp from "../utils/formatTimestamp";
 import { ethers } from "ethers";
 
-export default function EventCard({ id, name, eventTimestamp, imageURL, fee }) {
+export default function EventCard({ id, name, eventTimestamp, imageURL, fee, link}) {
   return (
     <div className="group relative clickable-card rounded-lg focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500">
       <Link href={`/event/${id}`}>
-        <a className="clickable-card__link"></a>
+        <a className="clickable-card__link" href={link}></a>
       </Link>
       <div className="block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden relative group-hover:opacity-75">
         {imageURL && <Image src={imageURL} alt="event image" layout="fill" />}

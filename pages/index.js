@@ -81,6 +81,7 @@ if (noGames && account)
                 eventTimestamp={game.timestamp}
                 imageURL={game.imageURL}
                 fee={game.fee}
+                link={`/event/${game.id}`}
               />
             </li>
           ))}

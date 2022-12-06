@@ -7,7 +7,7 @@ export default function Landing({ children }) {
         <title>Deffle</title>
         <meta
           name="description"
-          content="Find, join, and create virtual events with your web3 frens"
+          content="Find, join, and create RAffle Games with your web3 frens"
         />
       </Head>
       <section className="py-12">
